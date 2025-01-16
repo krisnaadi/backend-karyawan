@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\User;
+use Hash;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -22,7 +23,10 @@ class EmployeeController extends Controller
      */
     public function store(StoreEmployeeRequest $request)
     {
-        return User::create($request->validated());
+        $user = $request->validated();
+        $user['password'] = Hash::make($user['password']);
+        $user['join_date'] = now();
+        return User::create($user);
     }
 
     /**

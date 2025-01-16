@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    /**
+     * Login
+     * 
+     * @unauthenticated
+     */
     public function login(LoginRequest $request)
     {
         $credentials = $request->validated();
